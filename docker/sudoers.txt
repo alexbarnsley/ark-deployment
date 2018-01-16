@@ -1,0 +1,2 @@
+root ALL=(ALL) ALL
+sidechain ALL=(ALL) NOPASSWD: ALL

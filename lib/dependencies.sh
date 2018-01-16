@@ -43,13 +43,16 @@ check_nodejs_dependencies()
 {
     local -a dependencies="${1}"
 
+    echo "begin js dep"
     TO_INSTALL=""
     for dependency in ${dependencies[@]}; do
+        echo "dep: $dependency"
         INSTALLED=$(npm list -g "$dependency" | fgrep "$dependency" | awk '{print $2}' | awk -F'@' '{print $1}') || true
         if [[ "$INSTALLED" != "$dependency" ]]; then
             TO_INSTALL="$TO_INSTALL$dependency "
         fi
     done
+    echo "TO_INSTALL: $TO_INSTALL"
 
     if [[ ! -z "$TO_INSTALL" ]]; then
         read -p "[ ${TO_INSTALL}] are not installed. Do you want to install them? [y/N]: " choice
